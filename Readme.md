@@ -1,5 +1,5 @@
 This project builds a GDB with enabled python for pretty printing targetting nios.
-It is intended to replace the GDB found in Quartus-lite-21.1.0.842-windows but probably works with any v21.1
+It is intended to replace the GDB found in Quartus-lite-22.1.0.842-windows but probably works with any v22.1
 
 The executable runs on windows, required is at least Win10, as the msys UCRT64 is being used.
 ```
