@@ -48,6 +48,8 @@ Append the following to the PATH environment variable:
 C:\intelFPGA_lite\22.1std\nios2eds\bin\gnu\H-x86_64-mingw32\bin;C:\intelFPGA_lite\22.1std\nios2eds\sdk2\bin;C:\intelFPGA_lite\22.1std\nios2eds\bin
 ![Eclipse path](path.png)
 
+You will also need a .gdbinit file with the content found in the repo.
+
  If you wish to build it yourself on github after forking, then make sure you have the following permssions set in your github repo:
 
 ![Permissions](permissions.png)
