@@ -50,6 +50,7 @@ C:\intelFPGA_lite\22.1std\nios2eds\bin\gnu\H-x86_64-mingw32\bin;C:\intelFPGA_lit
 
 You will also need a .gdbinit file with the content found in the repo.
 Add the following config settings in your gdb settings
+
 ![image](https://github.com/materigoprecitec/nios-gdb/assets/101804238/701c2e32-e03f-4439-8453-55bc0ba6e8ab)
 
 
