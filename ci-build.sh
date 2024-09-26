@@ -32,3 +32,7 @@ pushd assets
 echo "[i] tarballing final artifact"
 tar -cJf ../nios-gdb.tar.xz .
 popd
+
+pushd ./assets/intelFPGA_lite/22.1std/nios2eds/bin/gnu/H-x86_64-mingw32/bin/
+./nios2-elf-gdb.exe --version
+popd
