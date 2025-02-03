@@ -1,8 +1,10 @@
 name: MSYS2 release
 on:
   push:
+    branches:
+      - '**'  # Runs on every branch push
     tags:
-      - '*'
+      - '*'   # Still runs on tag pushes if needed
 
 jobs:
   msys2-:

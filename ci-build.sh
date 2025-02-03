@@ -10,6 +10,7 @@ echo "[i] configuring"
 ./configure --target=nios2-elf --with-python --without-auto-load-safe-path --with-gdb-datadir=c:/intelfpga_lite/22.1std/nios2eds/bin/gnu/h-x86_64-mingw32/nios2-elf/share/gdb
 echo "[i] starting build"
 make all-gdb -j$(nproc)
+tree gdb
 strip gdb/gdb.exe
 popd
 
