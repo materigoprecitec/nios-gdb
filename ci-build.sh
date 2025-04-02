@@ -1,32 +1,39 @@
 #!/bin/bash
 
-gdbVersion="12.1"
+gdbVersion="15.2"
+quartusVersion=23.1std
 
 wget https://ftp.gnu.org/gnu/gdb/gdb-${gdbVersion}.tar.xz
 tar -xf gdb-${gdbVersion}.tar.xz
 
 pushd gdb-${gdbVersion}
 echo "[i] configuring"
-./configure --target=nios2-elf --with-python --without-auto-load-safe-path --with-gdb-datadir=c:/intelfpga_lite/22.1std/nios2eds/bin/gnu/h-x86_64-mingw32/nios2-elf/share/gdb
+./configure --target=nios2-elf --with-python --without-auto-load-safe-path --with-gdb-datadir=c:/intelfpga_lite/${quartusVersion}/nios2eds/bin/gnu/h-x86_64-mingw32/nios2-elf/share/gdb
 echo "[i] starting build"
 make all-gdb -j$(nproc)
-strip gdb/gdb.exe
+strip gdb/.libs/gdb.exe
 popd
 
 
 echo "[i] copying data directory"
-mkdir -p assets/intelFPGA_lite/22.1std/nios2eds/bin/gnu/H-x86_64-mingw32/nios2-elf/share/gdb
-cp -r ./gdb-${gdbVersion}/gdb/data-directory/python ./assets/intelFPGA_lite/22.1std/nios2eds/bin/gnu/H-x86_64-mingw32/nios2-elf/share/gdb
+mkdir -p assets/intelFPGA_lite/${quartusVersion}/nios2eds/bin/gnu/H-x86_64-mingw32/nios2-elf/share/gdb
+cp -r ./gdb-${gdbVersion}/gdb/data-directory/python ./assets/intelFPGA_lite/${quartusVersion}/nios2eds/bin/gnu/H-x86_64-mingw32/nios2-elf/share/gdb
 
 echo "[i] copying gdb.exe and .dll files"
-mkdir -p assets/intelFPGA_lite/22.1std/nios2eds/bin/gnu/H-x86_64-mingw32/bin
-cp ./gdb-${gdbVersion}/gdb/gdb.exe ./assets/intelFPGA_lite/22.1std/nios2eds/bin/gnu/H-x86_64-mingw32/bin/nios2-elf-gdb.exe
-cp /ucrt64/bin/*.dll ./assets/intelFPGA_lite/22.1std/nios2eds/bin/gnu/H-x86_64-mingw32/bin
+mkdir -p assets/intelFPGA_lite/${quartusVersion}/nios2eds/bin/gnu/H-x86_64-mingw32/bin
+cp ./gdb-${gdbVersion}/gdb/.libs/gdb.exe ./assets/intelFPGA_lite/${quartusVersion}/nios2eds/bin/gnu/H-x86_64-mingw32/bin/nios2-elf-gdb.exe
+cp /ucrt64/bin/*.dll ./assets/intelFPGA_lite/${quartusVersion}/nios2eds/bin/gnu/H-x86_64-mingw32/bin
 
 echo "[i] get python dll from embeddeble source"
-wget https://www.python.org/ftp/python/3.11.5/python-3.11.5-embed-amd64.zip
-unzip python-3.11.5-embed-amd64.zip -d python3.11
-cp -f ./python3.11/python311.dll ./assets/intelFPGA_lite/22.1std/nios2eds/bin/gnu/H-x86_64-mingw32/bin/libpython3.11.dll
+wget https://www.python.org/ftp/python/3.12.9/python-3.12.9-embed-amd64.zip
+unzip python-3.12.9-embed-amd64.zip -d python3.12
+cp -f ./python3.12/python312.dll ./assets/intelFPGA_lite/${quartusVersion}/nios2eds/bin/gnu/H-x86_64-mingw32/bin/libpython3.12.dll
+cp -f ./python3.12/python312.zip ./assets/intelFPGA_lite/${quartusVersion}/nios2eds/bin/gnu/H-x86_64-mingw32/bin/
+
+echo "gdb version: ${gdbVersion}" > assets/Readme.txt
+echo "quartus version: ${quartusVersion}" >> assets/Readme.txt
+echo " " >> assets/Readme.txt
+echo "extract this in your quartus installation directory" >> assets/Readme.txt
 
 pushd assets
 echo "[i] tarballing final artifact"
