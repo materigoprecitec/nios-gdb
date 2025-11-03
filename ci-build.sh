@@ -1,14 +1,14 @@
 #!/bin/bash
 
-gdbVersion="15.2"
+gdbVersion="16.3"
 quartusVersion=23.1std
 
-wget https://ftp.gnu.org/gnu/gdb/gdb-${gdbVersion}.tar.xz
+wget https://ftpmirror.gnu.org/gnu/gdb/gdb-${gdbVersion}.tar.xz
 tar -xf gdb-${gdbVersion}.tar.xz
 
 pushd gdb-${gdbVersion}
 echo "[i] configuring"
-./configure --target=nios2-elf --with-python --without-auto-load-safe-path --with-gdb-datadir=c:/intelfpga_lite/${quartusVersion}/nios2eds/bin/gnu/h-x86_64-mingw32/nios2-elf/share/gdb
+./configure --enable-targets=all --with-python --without-auto-load-safe-path
 echo "[i] starting build"
 make all-gdb -j$(nproc)
 strip gdb/.libs/gdb.exe
@@ -21,7 +21,7 @@ cp -r ./gdb-${gdbVersion}/gdb/data-directory/python ./assets/intelFPGA_lite/${qu
 
 echo "[i] copying gdb.exe and .dll files"
 mkdir -p assets/intelFPGA_lite/${quartusVersion}/nios2eds/bin/gnu/H-x86_64-mingw32/bin
-cp ./gdb-${gdbVersion}/gdb/.libs/gdb.exe ./assets/intelFPGA_lite/${quartusVersion}/nios2eds/bin/gnu/H-x86_64-mingw32/bin/nios2-elf-gdb.exe
+cp ./gdb-${gdbVersion}/gdb/.libs/gdb.exe ./assets/intelFPGA_lite/${quartusVersion}/nios2eds/bin/gnu/H-x86_64-mingw32/bin/gdb-multiarch.exe
 cp /ucrt64/bin/*.dll ./assets/intelFPGA_lite/${quartusVersion}/nios2eds/bin/gnu/H-x86_64-mingw32/bin
 
 echo "[i] get python dll from embeddeble source"
