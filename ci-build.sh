@@ -8,7 +8,7 @@ tar -xf gdb-${gdbVersion}.tar.xz
 
 pushd gdb-${gdbVersion}
 echo "[i] configuring"
-./configure --enable-targets=all --with-python --without-auto-load-safe-path
+./configure --enable-targets=all --disable-sysv-shm --disable-sysv-sem --disable-sysv-msg --with-python --with-expat --with-zlib --with-lzma --without-auto-load-safe-path
 echo "[i] starting build"
 make all-gdb -j$(nproc)
 strip gdb/.libs/gdb.exe
